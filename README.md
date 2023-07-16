@@ -63,8 +63,9 @@ Additional
 찜
 - 찜 추가
 - 찜 삭제
-  
+
 💙 ERD 설계
+
 ![image](https://github.com/sunlake123/commerce/assets/91143081/75bf1859-098f-45a6-b6cf-d29925315e76)
 
 
