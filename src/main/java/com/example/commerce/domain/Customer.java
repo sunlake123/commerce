@@ -2,11 +2,10 @@ package com.example.commerce.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,14 +18,20 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerNo;
     @Email
+    @NotNull
+    @Column(unique = true)
     private String email;
     private String password;
-//    private String username;
-//    private String zipcode;
-//    private String address1;
-//    private String address2;
-//    private String address3;
-//    private String phone;
-//    private LocalDateTime createDate;
-
+    @NotNull
+    @Column(unique = true)
+    private String username;
+    @NotNull
+    private String zipcode;
+    @NotNull
+    private String address;
+    @NotNull
+    @Column(unique = true)
+    private String phone;
+    private LocalDateTime createDate;
+    private Role role;
 }

@@ -23,6 +23,6 @@ public class Item {
     private String content;
     private String image;
     private Long price;
-    private Long cnt;
-    private LocalDateTime regDate;
+    private Long count;
+    private LocalDateTime registerDate;
 }

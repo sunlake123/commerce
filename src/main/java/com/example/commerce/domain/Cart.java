@@ -20,6 +20,6 @@ public class Cart {
     private Long cartNo;
     private Long customerNo;
     private Long itemNo;
-    private Long cnt;
+    private Long count;
     private LocalDateTime regDate;
 }
