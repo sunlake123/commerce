@@ -8,13 +8,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final CustomerService customerService;
-    private final TokenProvider tokenProvider;
 
     @PostMapping("/signUp")
     public ResponseEntity<Customer> signUp(@RequestBody Auth.SignUp request) {
@@ -24,8 +26,15 @@ public class AuthController {
 
     @PostMapping("/signIn")
     public ResponseEntity<?> signIn(@RequestBody Auth.SignIn request) {
-        Customer customer = customerService.authenticate(request);
-        tokenProvider.generateToken(customer.getEmail(), customer.getRole());
-        return ResponseEntity.ok(customer);
+        String token = customerService.authenticate(request);
+        System.out.println("token = " + token);
+        return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/test")
+    public Map userResponse() {
+        Map<String, String> result = new HashMap<>();
+        result.put("result", "user ok");
+        return result;
     }
 }
