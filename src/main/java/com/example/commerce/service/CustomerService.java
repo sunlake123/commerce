@@ -1,5 +1,6 @@
 package com.example.commerce.service;
 
+import com.example.commerce.Auth.TokenProvider;
 import com.example.commerce.domain.Customer;
 import com.example.commerce.dto.Auth;
 import com.example.commerce.repository.CustomerRepository;
@@ -15,6 +16,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TokenProvider tokenProvider;
 
     public Customer register(Auth.SignUp customer) {
         boolean exists = customerRepository.existsByEmail(customer.getEmail());
@@ -27,7 +29,7 @@ public class CustomerService {
         return customerRepository.save(customer.toEntity());
     }
 
-    public Customer authenticate(Auth.SignIn request) {
+    public String authenticate(Auth.SignIn request) {
         Customer customer = customerRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 이메일입니다."));
 
@@ -35,6 +37,8 @@ public class CustomerService {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
 
-        return customer;
+        String token = tokenProvider.generateToken(customer.getEmail(), customer.getRole());
+
+        return token;
     }
 }
