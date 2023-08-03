@@ -8,30 +8,25 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @Entity(name = "CUSTOMER")
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerNo;
     @Email
-    @NotNull
     @Column(unique = true)
     private String email;
     private String password;
-    @NotNull
     @Column(unique = true)
     private String username;
-    @NotNull
     private String zipcode;
-    @NotNull
     private String address;
-    @NotNull
     @Column(unique = true)
     private String phone;
     private LocalDateTime createDate;
+    @Enumerated(EnumType.STRING)
     private Role role;
 }

@@ -1,0 +1,39 @@
+### 상품 추가
+POST http://localhost:8080/item/add-item
+Content-Type: application/json
+
+{
+  "categoryNo": 1,
+  "name": "딸기3",
+  "content": "맛있어요3",
+  "image": "딸기사진3",
+  "price": 300,
+  "count": 3
+}
+
+### 상품 추가
+POST http://localhost:8080/item/add-item
+Content-Type: application/json
+
+{
+  "categoryNo": 2,
+  "name": "2",
+  "content": "2",
+  "image": "2",
+  "price": 2,
+  "count": 2
+}
+
+### 상품 추가
+POST http://localhost:8080/item/add-item
+Content-Type: application/json
+
+{
+  "categoryNo": 3,
+  "name": "3",
+  "content": "3",
+  "image": "3",
+  "price": 3,
+  "count": 3
+}
+

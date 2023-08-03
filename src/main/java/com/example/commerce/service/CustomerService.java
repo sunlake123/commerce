@@ -2,7 +2,7 @@ package com.example.commerce.service;
 
 import com.example.commerce.Auth.TokenProvider;
 import com.example.commerce.domain.Customer;
-import com.example.commerce.dto.Auth;
+import com.example.commerce.dto.request.AuthRequest;
 import com.example.commerce.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +18,7 @@ public class CustomerService {
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
 
-    public Customer register(Auth.SignUp customer) {
+    public Customer register(AuthRequest.SignUp customer) {
         boolean exists = customerRepository.existsByEmail(customer.getEmail());
         if (exists) {
             throw new RuntimeException("이미 사용 중인 이메일입니다.");
@@ -29,7 +29,7 @@ public class CustomerService {
         return customerRepository.save(customer.toEntity());
     }
 
-    public String authenticate(Auth.SignIn request) {
+    public String authenticate(AuthRequest.SignIn request) {
         Customer customer = customerRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 이메일입니다."));
 
