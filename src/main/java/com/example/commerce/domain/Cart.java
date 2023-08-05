@@ -2,24 +2,26 @@ package com.example.commerce.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@Entity
+@Entity(name = "CART")
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartNo;
     private Long customerNo;
-    private Long itemNo;
+    @ManyToOne
+    @JoinColumn(name = "item_no")
+    private Item item;
     private Long count;
-    private LocalDateTime regDate;
+    private LocalDateTime registerDate;
+
+    public void addCount(long count) {
+        this.count += count;
+    }
 }

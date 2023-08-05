@@ -1,8 +1,7 @@
 package com.example.commerce.controller;
 
-import com.example.commerce.Auth.TokenProvider;
 import com.example.commerce.domain.Customer;
-import com.example.commerce.dto.Auth;
+import com.example.commerce.dto.request.AuthRequest;
 import com.example.commerce.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +18,13 @@ public class AuthController {
     private final CustomerService customerService;
 
     @PostMapping("/signUp")
-    public ResponseEntity<Customer> signUp(@RequestBody Auth.SignUp request) {
+    public ResponseEntity<Customer> signUp(@RequestBody AuthRequest.SignUp request) {
         Customer customer = customerService.register(request);
         return ResponseEntity.ok(customer);
     }
 
     @PostMapping("/signIn")
-    public ResponseEntity<?> signIn(@RequestBody Auth.SignIn request) {
+    public ResponseEntity<?> signIn(@RequestBody AuthRequest.SignIn request) {
         String token = customerService.authenticate(request);
         System.out.println("token = " + token);
         return ResponseEntity.ok(token);

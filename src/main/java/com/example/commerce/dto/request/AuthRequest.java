@@ -1,4 +1,4 @@
-package com.example.commerce.dto;
+package com.example.commerce.dto.request;
 
 import com.example.commerce.domain.Customer;
 import com.example.commerce.domain.Role;
@@ -6,7 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-public class Auth {
+public class AuthRequest {
 
     @Data
     public static class SignIn {
@@ -14,11 +14,11 @@ public class Auth {
         private String password;
     }
 
-    @Builder
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
+    @Builder
     public static class SignUp {
         private String email;
         private String password;

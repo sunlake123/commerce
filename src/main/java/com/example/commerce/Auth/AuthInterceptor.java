@@ -20,13 +20,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("AuthInterceptor.preHandle");
+        System.out.println(handler + "AuthInterceptor.preHandle");
         String token = resolveTokenFromRequest(request);
 
         tokenProvider.validateToken(token);
 
         String email = tokenProvider.getEmail(token);
-
+        request.setAttribute("email", email);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
