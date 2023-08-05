@@ -25,24 +25,23 @@ public class CartService {
     private final CartRepository cartRepository;
     private final ItemRepository itemRepository;
 
-    public void addItem(CartRequest request) {
+    public void addItem(String email, CartRequest request) {
 
         Item item = itemRepository.findById(request.getItemNo())
                 .orElseThrow(() -> new ItemNotFoundException("해당하는 상품이 없습니다."));
 
-        Optional<Cart> cart = cartRepository.findByCustomerNoAndItem(request.getCustomerNo(), item);
-
+        Optional<Cart> cart = cartRepository.findByEmailAndItem(email, item);
 
         if (cart.isEmpty()) {
-            cartRepository.save(request.toEntity(item));
+            cartRepository.save(request.toEntity(email, item));
         } else {
             cart.get().addCount(request.getCount());
         }
     }
 
-    public List<CartDto> getList(Long customerNo) {
+    public List<CartDto> getList(String email) {
 
-        List<Cart> carts = cartRepository.findAllByCustomerNoOrderByRegisterDateDesc(customerNo).get();
+        List<Cart> carts = cartRepository.findAllByEmailOrderByRegisterDateDesc(email).get();
 
         List<CartDto> cartDtos = new ArrayList<>();
 
@@ -60,13 +59,23 @@ public class CartService {
         return cartDtos;
     }
 
-    public void deleteItem(Long customerNo, Long itemNo) {
+    public void deleteItem(String email, Long itemNo) {
         Item item = itemRepository.findById(itemNo).orElseThrow(() ->
                 new ItemNotFoundException("해당 상품이 존재하지 않습니다."));
 
-        Cart cart = cartRepository.findByCustomerNoAndItem(customerNo, item).orElseThrow(() ->
+        Cart cart = cartRepository.findByEmailAndItem(email, item).orElseThrow(() ->
         new ItemNotFoundException("장바구니에 해당 상품이 존재하지 않습니다."));
 
         cartRepository.delete(cart);
+    }
+
+    public void updateItem(String email, CartRequest request) {
+        Item item = itemRepository.findById(request.getItemNo()).orElseThrow(() ->
+                new ItemNotFoundException("해당 상품이 존재하지 않습니다."));
+
+        Cart cart = cartRepository.findByEmailAndItem(email, item).orElseThrow(() ->
+                new ItemNotFoundException("장바구니에 해당 상품이 존재하지 않습니다."));
+
+        cart.setItemCount(request.getCount());
     }
 }

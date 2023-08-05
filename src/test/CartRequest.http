@@ -1,18 +1,31 @@
 ### 장바구니에 상품 추가
 POST http://localhost:8080/cart/put-item
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdW5sYWtlMTIzQG5hdmVyLmNvbSIsInJvbGVzIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTY5MTIxOTE4NSwiZXhwIjoxNjkxMjIyNzg1fQ.tlxLhs8IOgBTF05qNeBElasVd3HrhKY4KvVWJ1f7yM67BL5F-hW_Li30u3k5DkSqUwUoaTk51MI1UrIZSRYiqw
+
 
 {
-  "customerNo": 1,
-  "itemNo": 3,
+  "itemNo": 1,
   "count": 3
 }
 
 ### 장바구니 목록 조회
-GET http://localhost:8080/cart?customerNo=1
+GET http://localhost:8080/cart?email=sunlake123@naver.com
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdW5sYWtlMTIzQG5hdmVyLmNvbSIsInJvbGVzIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTY5MTIxOTE4NSwiZXhwIjoxNjkxMjIyNzg1fQ.tlxLhs8IOgBTF05qNeBElasVd3HrhKY4KvVWJ1f7yM67BL5F-hW_Li30u3k5DkSqUwUoaTk51MI1UrIZSRYiqw
+
 
 ### 장바구니 상품 삭제
 DELETE http://localhost:8080/cart/delete-item?customerNo=1&itemNo=2
-Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdW5sYWtlMTIzQG5hdmVyLmNvbSIsInJvbGVzIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTY5MDgzMzU3MCwiZXhwIjoxNjkwODM3MTcwfQ.OpfLdlf7K7lih7KTgEewKYZTl4TUfd7Gxykpa8f3wqY9FL5l3HioRbNYckSktLOYJpmz2Ecj8uiViebKWQje-w
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdW5sYWtlMTIzQG5hdmVyLmNvbSIsInJvbGVzIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTY5MTIxOTE4NSwiZXhwIjoxNjkxMjIyNzg1fQ.tlxLhs8IOgBTF05qNeBElasVd3HrhKY4KvVWJ1f7yM67BL5F-hW_Li30u3k5DkSqUwUoaTk51MI1UrIZSRYiqw
 Content-Type: application/json
+
+### 장바구니 개수 수정
+PATCH http://localhost:8080/cart/update-item
+Authorization: bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdW5sYWtlMTIzQG5hdmVyLmNvbSIsInJvbGVzIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTY5MTIxOTE4NSwiZXhwIjoxNjkxMjIyNzg1fQ.tlxLhs8IOgBTF05qNeBElasVd3HrhKY4KvVWJ1f7yM67BL5F-hW_Li30u3k5DkSqUwUoaTk51MI1UrIZSRYiqw
+Content-Type: application/json
+
+{
+  "itemNo": 1,
+  "count": 6
+}
