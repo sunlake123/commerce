@@ -10,13 +10,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartRequest {
-    private Long customerNo;
     private Long itemNo;
     private Long count;
 
-    public Cart toEntity(Item item) {
+    public Cart toEntity(String email, Item item) {
         return Cart.builder()
-                .customerNo(this.getCustomerNo())
+                .email(email)
                 .item(item)
                 .count(this.getCount())
                 .registerDate(LocalDateTime.now())

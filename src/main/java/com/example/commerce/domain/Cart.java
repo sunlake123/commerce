@@ -14,8 +14,8 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartNo;
-    private Long customerNo;
-    @ManyToOne
+    private String email;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_no")
     private Item item;
     private Long count;
@@ -23,5 +23,9 @@ public class Cart {
 
     public void addCount(long count) {
         this.count += count;
+    }
+
+    public void setItemCount(long count) {
+        this.count = count;
     }
 }

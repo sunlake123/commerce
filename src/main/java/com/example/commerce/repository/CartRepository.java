@@ -6,14 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
-    Optional<Cart> findByCustomerNoAndItem(Long customerNo, Item item);
+    Optional<Cart> findByEmailAndItem(String email, Item item);
 
-    Optional<List<Cart>> findAllByCustomerNoOrderByRegisterDateDesc(Long customerNo);
-
-
+    Optional<List<Cart>> findAllByEmailOrderByRegisterDateDesc(String email);
 }
