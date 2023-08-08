@@ -64,7 +64,7 @@ public class CartService {
                 new ItemNotFoundException("해당 상품이 존재하지 않습니다."));
 
         Cart cart = cartRepository.findByEmailAndItem(email, item).orElseThrow(() ->
-        new ItemNotFoundException("장바구니에 해당 상품이 존재하지 않습니다."));
+                new ItemNotFoundException("장바구니에 해당 상품이 존재하지 않습니다."));
 
         cartRepository.delete(cart);
     }
